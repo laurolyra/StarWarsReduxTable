@@ -10,7 +10,7 @@ Criei um projeto em React utilizando Redux para controle de estado. A aplicaçã
 
 1 - Clone este repositório
 
-`git clone git@github.com:laurolyra/my-projects.git`
+`git clone git@github.com:laurolyra/StarWarsReduxTable.git`
 
 2 - Vá para a pasta do projeto
 
