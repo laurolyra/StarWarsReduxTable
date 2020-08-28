@@ -1,4 +1,4 @@
-# Projeto Star Wars DataTable Filters (com Redux)!
+# Projeto Star Wars DataTable Filters (com Redux)
 
 Este projeto foi feito para avaliação de meus conhecimentos sobre _react/redux_ no curso de _Software Development_ ofertado pela Trybe.
 
