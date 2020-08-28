@@ -14,7 +14,7 @@ Criei um projeto em React utilizando Redux para controle de estado. A aplicaçã
 
 2 - Vá para a pasta do projeto
 
-`cd StarWarsRedux`
+`cd StarWarsReduxTable`
 
 3 - Instale as dependências
 
