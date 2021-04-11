@@ -28,7 +28,7 @@ I've made an SPA with React and using redux to control the global state. The app
 
 Every requirement down below refers to business rules defined by Trybe, which I couldn't change to another pattern or use another technology.
 
-## 1 - Make a request to the endpoiint `/planets` from a Star Wars API and fill a table with every data but the key `residents`.
+## 1 - When mounted, the page makes a request to the endpoiint `/planets` from a Star Wars API and fill a table with every data but the key `residents`.
 
 All API data is stored in a field called `data` inside the `store`. A component called `<Table />` renders every data from store. This asynchronous operation was done with the library [redux-thunk](https://github.com/reduxjs/redux-thunk)
 
