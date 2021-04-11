@@ -1,40 +1,42 @@
-# Projeto Star Wars DataTable Filters (com Redux)
+# Star Wars DataTable Filters (with Redux)
 
-Este projeto foi feito para avaliação de meus conhecimentos sobre _react/redux_ no curso de _Software Development_ ofertado pela Trybe.
+This project was entirely created as a prerequisite to measure my _react_redux_ skills on Trybe's Software Development course.
 
-## O que foi desenvolvido:
+## What's been done here:
 
-Criei um projeto em React utilizando Redux para controle de estado. A aplicação consiste numa tabela com informações acerca de todos os planetas existentes no universo fictício da série _Star Wars_. A tabela foi alimentada com dados retornados de uma API real. Há, também, vários filtros que permitirão a quem usa selecionar e encontrar com facilidade a informação desejada.
+I've made an SPA with React and using redux to control the global state. The application consists in a table with lots of information about planets in _Star Wars_ universe. It's been generated with data from an API. Also, there are filters which will allow users to select and find planets.
 
-## Instruções para execução
+## Installation
 
-1 - Clone este repositório
+1 - Clone this repo
 
 `git clone git@github.com:laurolyra/StarWarsReduxTable.git`
 
-2 - Vá para a pasta do projeto
+2 - Navigate to project's directory
 
 `cd StarWarsReduxTable`
 
-3 - Instale as dependências
+3 - Install dependencies
 
 `npm install`
 
-4 - Inicie a aplicação
+4 - Run the application
 
 `npm start`
 
-# Requisitos Obedecidos
+# Fullfiled Requrements
 
-Todos os requisitos abaixo constituem regras de negócio definidas pela escola, as quais não pude alterá-las para uma outra arquitetura ou uso de outra tecnologia.
+Every requirement down below refers to business rules defined by Trybe, which I couldn't change to another pattern or use another technology.
 
-## 1 - Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`.
+## 1 - Make a request to the endpoiint `/planets` from a Star Wars API and fill a table with every data but the key `residents`.
 
-A tabela foi renderizada por um componente chamado `<Table />`. Os dados recebidos da API foram salvos num campo `data` do `store` e é daí que a tabela os lê. A requisição foi feita via utilização da biblioteca _redux-thunk_.
+All API data is stored in a field called `data` inside the `store`. A component called `<Table />` renders every data from store. This asynchronous operation was done with the library [redux-thunk](https://github.com/reduxjs/redux-thunk)
 
-## 2 - Apresentação de um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado.
+## 2 - Text Field that filters the table to show only planets whose names includes part of the text.
 
-A tabela é atualizada com os planetas que se encaixam no filtro à medida que o nome é digitado, sem ter que apertar um botão para efetuar a filtragem. Por exemplo, se digitar "ald", o planeta "Alderaan" é exibido (este campo não é _case sensitive_, portanto). Foi utilizado o **Redux** para fazer o gerenciamento do estado da aplicação e o texto digitado foi salvo num campo `filters: [{ name }]`, a seguir demonstrado:
+The table is updated with the planets that has part or the letters typed on its name. There isn't a search button. The input field is not case sensitive. E.g., if users type "ald", the planet "Alderaan" is exhibited.
+
+**Redux** is used to manage the application's state and the text is saved in a field named `filters: [{ name }]`:
 
 ```javascript
 {
@@ -46,19 +48,20 @@ A tabela é atualizada com os planetas que se encaixam no filtro à medida que o
 }
 ```
 
-## 3 - A página contém um filtro para valores numéricos.
+## 3 - The page contains numerics filters.
 
-Ela funciona com três seletores:
+It works with 3 selectors:
 
-  - O primeiro abre um dropdown que permite ao usuário selecionar uma das seguintes colunas: `population`, `orbital_period`, `diameter`, `rotation_period` e `surface_water`.
-  - O segundo determina se a faixa de valor será maior (`more than`), menor (`less than`) ou igual (`equal to`) ao numero que virá a seguir.
-  - O terceiro é uma caixa de texto que só aceita números.
+  - The first one opens a dropdown that allows users to select one of the following columns: `population`, `orbital_period`, `diameter`, `rotation_period` e `surface_water`.
+  - The second one has 3 options: `more than`, `less than` or `equal to` ao numero que virá a seguir.
+  - The third one is a input field that allows only numbers.
 
-A combinação desses três seletores, após o clique do botão `Filter!`, filtra os dados da tabela de acordo com a coluna correspondente e com os valores escolhidos. Por exemplo:
-  - A seleção `population | more than | 100000` - Seleciona somente planetas com mais de 100000 habitantes.
-  - A seleção `diameter | less than | 8000` - Seleciona somente planetas com diâmetro menor que 8000.
+These three selectors combined, after clicking `Filter!`, filters every data according to chosen columns and values input. E.g.:
 
-Foi utilizado **Redux** para fazer o gerenciamento do estado da aplicação. No `store`, esses valores foram salvos nos campos `filters [{ numericValues: { column, comparison, value } }]`. Por exemplo:
+  - If `population | more than | 100000` were selected, table will show, after click on search, only planets with more than 100000 inhabitants.
+  - If `diameter | less than | 8000` were selected, table will show, after click on search, only planetas with diameter larger than 8000.
+
+**Redux** is used to manage the application's state. On `store`, these values are inserted on fields `filters [{ numericValues: { column, comparison, value } }]`:
 
 ```javascript
 {
@@ -74,11 +77,13 @@ Foi utilizado **Redux** para fazer o gerenciamento do estado da aplicação. No 
 }
 ```
 
-## 4 - A página sempre será carregada com, somente, um filtro de valores numéricos.
+## 4 - The page will show only one numeric filter set per time.
 
-Caso um filtro seja totalmente preenchido (e o botão `Filter!` clicado), um novo filtro de valores numéricos é carregado. Este novo filtro não inclui quaisquer colunas que já tenham sido selecionadas em filtros de valores numéricos anteriores. Caso todas as colunas já tenham sido inclusas em filtros anteriores, surge a mensagem `No more filters available!`. Foi utilizado **Redux** para fazer o gerenciamento do estado da aplicação.
+If all three dropdowns are filled and user clicks on button `Filter!`, a new filter set will be shown.
 
-Por exemplo: O primeiro filtro tem as seguintes seleções: `population | more than| 100000`. Um segundo filtro aparece após essas seleções serem todas feitas e, no primeiro dropdown deste segundo filtro, a opção `population` está ausente. Se no segundo filtro fosse selecionado `diameter | less than | 8000`, o estado ficaria assim:
+This new set won't include any columns that were selected before. If all the 5 columns were selected and used to filter data, a message `No more filters available!` will appear on screen. **Redux** is used to manage the application's state.
+
+E.g., the first filter has the following criteria: `population | more than| 100000`. The second one appears after clicking on filter, but the first dropdown will show all columns but the one named `population`. If user selects, on second filter, the options `diameter | less than | 8000`, the application's state will be as follows:
 
 ```javascript
 {
@@ -102,13 +107,13 @@ Por exemplo: O primeiro filtro tem as seguintes seleções: `population | more t
 ```
 
 
-## 5 - Cada filtro de valores numéricos tem um ícone de `X` que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela.
+## 5 - Every numeric filter has an X icon that, when clicked, excludes it and undo any changes made in the table.
 
-A coluna que este filtro selecionava passa a ficar disponível nos _dropdowns_ dos demais filtros já presentes na tela. Também foi utilizado **Redux** para fazer o gerenciamento do estado da aplicação.
+The column option of the selected filter (i.e., the first dropdown) is available to be selected again. **Redux** is used to manage the application's state.
 
-## 6 - As colunas da tabela são ordenáveis de forma ascendente ou descendente.
+## 6 - Table's columns can be ordered ascending or descending.
 
-A informação acerca da ordenação das colunas foi armazenada nos campos `filters: [{ column: 'Name', order: 'ASC'}]`, o campo `column` representa o nome da coluna a ordenar e a ordem representa a ordenação, sendo `ASC` para ascendente e `DESC` para uma ordem descendente. Por padrão, a tabela começa ordenada pela coluna 'Name' em ordem ascendente. Por exemplo:
+Its order is stored in the fields `filters: [{ column: 'Name', order: 'ASC'}]`. The field `column` represents the column's criteria to order the table. By default, it is ordered by name in ascending order:
 
 ```javascript
 {
